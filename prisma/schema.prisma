@@ -2,7 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 datasource db {
@@ -13,30 +14,30 @@ datasource db {
 model Category {
   id         String      @id @default(uuid())
   name       String
-  // companions Companion[]
+  companions Companion[]
 }
 
-// model Companion {
-//   id           String @id @default(uuid())
-//   userId       String
-//   userName     String
-//   src          String
-//   name         String @db.Text
-//   description  String
-//   instructions String @db.Text
-//   seed         String @db.Text
+model Companion {
+  id           String @id @default(uuid())
+  userId       String
+  userName     String
+  src          String
+  name         String @db.Text
+  description  String
+  instructions String @db.Text
+  seed         String @db.Text
 
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-//   category   Category @relation(fields: [categoryId], references: [id])
-//   categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String
 
-//   messages Message[]
+  // messages Message[]
 
-//   // @@index([categoryId])
-//   // @@fulltext([name])
-// }
+  @@index([categoryId])
+  // @@fulltext([name])
+}
 
 // enum Role {
 //   user
